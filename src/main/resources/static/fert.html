@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Fert</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .panel {
+            margin-top: 20%;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="panel panel-primary">
+        <div class="panel-heading title"></div>
+        <div class="panel-body content"></div>
+    </div>
+    <form>
+        <div class="form-group">
+            <label for="url">下面粘贴网址：</label>
+            <input type="text" class="form-control" id="url" placeholder="空空如也">
+        </div>
+        <button type="button" class="btn btn-default" onclick="submitForm()">然后点这儿</button>
+    </form>
+
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@1.12.4/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js"></script>
+<script>
+    $(".title").text("标题")
+    $(".content").text("内容")
+
+    function submitForm() {
+        var url = $("#url").val()
+        $.ajax({
+            type: 'get',
+            url: '/spider/fert?url=' + url,
+            success: function (res) {
+                $(".title").text(res.title)
+                $(".content").text(res.content)
+            },
+            error: function (res) {
+                console.log(res);
+            }
+        })
+    };
+
+</script>
+</body>
+</html>
